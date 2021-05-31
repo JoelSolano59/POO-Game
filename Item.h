@@ -2,6 +2,7 @@
 #define Item_h
 
 #include <string>
+#include <iostream>
 
 class Item{
     public:
