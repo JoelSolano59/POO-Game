@@ -1,2 +1,2 @@
 // Hola mundo
-// Que loco
+// Que locok
