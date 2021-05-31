@@ -36,6 +36,8 @@ Inventario :: Inventario(Item b){
 //void Inventario :: setInvetario(Item c){inventory = c;}
 
 // Métodos
+// Los siguientes métodos están sujeto a cambio. Por el momento son el código base o 
+// el esqueleto de nuestro programa.
 void Inventario :: muestra(){
     // Una impresión simple por el momento. Sujeto a cambio!
     Item objeto;
@@ -46,4 +48,12 @@ void Inventario :: muestra(){
     }
 }
 
+void Inventario :: agrega(int posicion, Item objeto){
+    inventory[posicion] = objeto;
+}
+
+void Inventario :: quita(int posicion) {
+    Item a;
+    inventory[posicion] = a;
+}
 #endif
