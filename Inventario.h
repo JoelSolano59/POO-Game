@@ -2,7 +2,7 @@
 #define Inventario_h
 #include "Item.h"
 
-class Inventario: public Item{
+class Inventario{
     public:
     // Constructores
     Inventario();
