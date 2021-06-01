@@ -6,7 +6,7 @@ class Arma: public Item{
     public: 
     // Constructores
     Arma();
-    Arma(int);
+    Arma(int, int, std::string, std::string);
 
     // Getters y Setters
     int getDanio() const;
@@ -24,7 +24,7 @@ Arma :: Arma(){
     danio = 0;
 }
 
-Arma :: Arma(int dan){
+Arma :: Arma(int dan, int usos, std::string name, std::string desc): Item(usos, name, desc){
     danio = dan;
 }
 
