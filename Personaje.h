@@ -1,10 +1,11 @@
 #ifndef PERSONAJE_h
 #define PERSONAJE_h
 
+#include "Inventario.h"
 #include <string>
 #include <iostream>
 
-class Personaje{
+class Personaje:public Inventario{
     public:
         Personaje();
         Personaje(string, string, Inventario, int);
