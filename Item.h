@@ -9,7 +9,6 @@ class Item{
     // Constructores y destructor
     Item();
     Item(int, std::string, std::string);
-    ~Item();
 
     // Setters y Getters
     int getNumUsos() const;
@@ -36,8 +35,6 @@ Item :: Item(int usos, std::string name, std::string desc){
     nombre = name;
     descripcion = desc;
 }
-
-Item :: ~Item(){}
 
 // Setters y Getters
 int Item :: getNumUsos() const{return numUsos;}

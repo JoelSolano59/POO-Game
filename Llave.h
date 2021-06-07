@@ -1,33 +1,33 @@
 #ifndef LLAVE_h
 #define LLAVE_h
-#include "Llave.h"
+#include "Item.h"
 
 class Llave: public Item{
     public:
     // Constructores
     Llave();
-    Llave(char);
+    Llave(std::string, int, std::string, std::string);
 
     // Getters y Setters
-    char getColor() const;
-    void setColor(char);
+    std::string getColor() const;
+    void setColor(std::string);
 
     private:
-    char color[1];
+    std::string color;
 
 };
 
 // Constructores
 Llave::Llave(){
-    color = "-";
+    color = "--";
 }
 
-Llave::Llave(char c, int usos, std::string name, std::string desc): Item(usos, name, desc){
+Llave::Llave(std::string c, int usos, std::string name, std::string desc): Item(usos, name, desc){
     color = c;
 }
 
 // Getters y Setters
-char Llave::getColor() const{return color;}
-void Llave::setColor(char c){color = c;}
+std::string Llave::getColor() const{return color;}
+void Llave::setColor(std::string c){color = c;}
 
 #endif

@@ -43,7 +43,7 @@ void Arma :: usarArma(){
     //
     if(cantUsos <= 0){
         // Destruir Item
-        Item::~Item();
+       //Item::~Item();
     }
 }
 

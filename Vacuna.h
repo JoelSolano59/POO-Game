@@ -43,7 +43,7 @@ void Vacuna :: usarVacuna(){
     //
     if(cantUsos <= 0){
         // Destruir Item
-        Item::~Item();
+        //Item::~Item();
     }
 }
 

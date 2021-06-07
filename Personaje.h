@@ -66,10 +66,9 @@ void Personaje::muestra(){
 }
 
 void Personaje::quitaVida(){
-    try {
+    if (vida > 0) {
         vida--;
-    }
-    catch {
+    } else {
         vida = 0;
     }
 }
