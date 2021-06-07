@@ -72,9 +72,11 @@ void cargarPortada(){
 }
 
 int main() {
-    system("Title Time Paradox");
-    system("Color 4a");
-    system("cls");
-    system("pause");
+    AjustePantalla();
+    cargarPortada();
+    //system("Title Time Paradox");
+    //system("Color 4a");
+    //system("cls");
+    //system("pause");
     return 0;
 }
