@@ -1,0 +1,31 @@
+
+* Antes de continuar al programa, tendrá que ajustar su pantalla de la consola/terminal en donde está corriendo este juego. :)
+* Para cambiar la magnificación, puede usar -"ctrl" + "mousewheel"- ó -"ctrl" + "+"/"-".
+
+- Procure que la siguiente siguiente flecha de dos puntas es imprimida en una sola línea:
+<---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+Y que la siguiente se pueda ver por completo de manera vertical:
+ ^
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+_|_
+
+* Nota: Lo importante es ver todo este mensaje, para que los textos se impriman de manera correcta! :)
