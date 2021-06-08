@@ -35,7 +35,7 @@ using namespace std;
 // La primera función que se llama al momento de correr el juego.
 // Este avisa al usuario de como debe de quedar la pantalla.
 void ajustePantalla(){
-    ifstream archivo("./txt/AjustePantalla.txt");
+    ifstream archivo;
     string linea;
     try {
         if (archivo){
@@ -57,7 +57,7 @@ void ajustePantalla(){
 // Función que carga la portada del juego, este es llamado después 
 // de la función AjustePantalla()
 void cargarPortada(){
-    ifstream archivo("./txt/Portada.txt");
+    ifstream archivo;
     string linea;
     try {
         if (archivo){
