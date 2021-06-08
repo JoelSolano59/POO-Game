@@ -6,7 +6,7 @@ class Llave: public Item{
     public:
     // Constructores
     Llave();
-    Llave(std::string, int, std::string, std::string);
+    Llave(std::string, int, std::string, std::string); // string color, int numUsos, string nombre, string descripción
 
     // Getters y Setters
     std::string getColor() const;

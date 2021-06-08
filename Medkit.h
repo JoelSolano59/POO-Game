@@ -6,7 +6,7 @@ class Medkit: public Item{
     public:
     // Constructores
     Medkit();
-    Medkit(int, int, std::string, std::string);
+    Medkit(int, int, std::string, std::string); // int magnitud, int numUsos, string nombre, string descripción
 
     // Getters y Setters
     int getMagnitud() const;
