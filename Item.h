@@ -8,7 +8,7 @@ class Item{
     public:
     // Constructores y destructor
     Item();
-    Item(int, std::string, std::string);
+    Item(int, std::string, std::string); // int numUsos, string nombre, string descripcion
 
     // Setters y Getters
     int getNumUsos() const;
@@ -18,12 +18,15 @@ class Item{
     void setNombre(std::string);
     void setDescripcion(std::string);
 
+    // Métodos
+    virtual std::string mostrar(); // Regresa un string de todos los atributos
+
     private:
     int numUsos;
     std::string nombre, descripcion;
 };
 
-// Constructores y destructor
+// Constructores
 Item :: Item(){
     numUsos = 0;
     nombre = "----";
@@ -44,4 +47,10 @@ void Item :: setNumUsos(int usos){numUsos = usos;}
 void Item :: setNombre(std::string name){nombre = name;}
 void Item :: setDescripcion(std::string desc){descripcion = desc;}
 
+// Métodos
+std::string Item :: mostrar(){
+    std::string mensaje;
+    mensaje = "Nombre: " + getNombre() + ". Usos faltantes: " + std::to_string(getNumUsos()) + ". Descripcion: " + getDescripcion();
+    return mensaje;
+}
 #endif
