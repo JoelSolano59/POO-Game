@@ -39,7 +39,7 @@ void AjustePantalla(){
     system("cls");
     ifstream archivo;
     string linea;
-    archivo.open("AjustePantalla.txt");
+    archivo.open("./txt/AjustePantalla.txt");
     while(getline(archivo, linea)){
         cout << linea << endl;
     }
@@ -55,7 +55,7 @@ de la función AjustePantalla()
 void cargarPortada(){
     ifstream archivo;
     string linea;
-    archivo.open("Portada.txt");
+    archivo.open("./txt/Portada.txt");
 
     for(int i=1; i<26; i++){
         getline(archivo, linea);

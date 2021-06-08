@@ -1,6 +1,0 @@
-#include "Arma.h"
-#include "Medkit.h"
-#include "Llave.h"
-#include "Vacuna.h"
-#include "Inventario.h"
-#include "Personaje.h"
