@@ -18,7 +18,7 @@ class Item{
     void setNombre(std::string);
     void setDescripcion(std::string);
 
-    // Métodos
+    // Método
     virtual std::string mostrar(); // Regresa un string de todos los atributos
 
     private:
