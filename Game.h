@@ -95,6 +95,22 @@ void Game::timeMachine(){
 
 }
 
+void Game::programas(){
+
+}
+
+void Game::mensajes(){
+
+}
+
+void Game::correo(){
+
+}
+
+void Game::Game::navegador(){
+
+}
+
 void Game::objetivos(){
     
 }

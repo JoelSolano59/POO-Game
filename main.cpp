@@ -31,15 +31,22 @@ using namespace std;
 #include "Inventario.h"
 #include "Personaje.h"
 
-/*
-La primera función que se llama al momento de correr el juego.
-Este avisa al usuario de como debe de quedar la pantalla.
-*/
-void AjustePantalla(){
-    system("cls");
-    ifstream archivo;
+
+// La primera función que se llama al momento de correr el juego.
+// Este avisa al usuario de como debe de quedar la pantalla.
+void ajustePantalla(){
+    ifstream archivo("./txt/AjustePantalla.txt");
     string linea;
-    archivo.open("./txt/AjustePantalla.txt");
+    try {
+        if (archivo){
+            archivo.open("./txt/AjustePantalla.txt");
+        } else {
+            throw invalid_argument("Error, no se pudo abrir el archivo: ./txt/AjustePantalla.txt" );
+        }
+    }
+    catch(const std::exception& e){
+        std::cerr << e.what() << '\n';
+    }
     while(getline(archivo, linea)){
         cout << linea << endl;
     }
@@ -47,16 +54,21 @@ void AjustePantalla(){
     system("cls");
 }
 
-
-/*
-Función que carga la portada del juego, este es llamado después 
-de la función AjustePantalla()
-*/
+// Función que carga la portada del juego, este es llamado después 
+// de la función AjustePantalla()
 void cargarPortada(){
-    ifstream archivo;
+    ifstream archivo("./txt/Portada.txt");
     string linea;
-    archivo.open("./txt/Portada.txt");
-
+    try {
+        if (archivo){
+            archivo.open("./txt/Portada.txt");
+        } else {
+            throw invalid_argument("Error, no se pudo abrir el archivo: ./txt/Portada.txt" );
+        }
+    }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
     for(int i=1; i<26; i++){
         getline(archivo, linea);
         if(i<10){
@@ -71,11 +83,51 @@ void cargarPortada(){
     system("cls");
 }
 
+// Funcion que carga el menu principal del juego, este es llamado despues
+// de la funcion cargarPortada()
+void menuPrincipal(){
+    int opcion = 0;
+    do {
+        system("cls");
+        cout << "Menu principal: " << endl;
+        cout << "1) Iniciar juego." << endl;
+        cout << "2) Como jugar." << endl;
+        cout << "3) Datos personales." << endl;
+        cout << "4) Salir del juego." << endl;
+        cin >> opcion;
+        system("cls");
+        switch (opcion) {
+        case 1:
+            // Iniciar juego
+            break;
+        case 2:
+            // Como jugar
+            break;    
+        case 3:
+            // Datos personales
+            break;
+        case 4:
+            // Salir del juego
+            break;
+        default:
+            // Opcion default
+            cout << "Opcion no valida, vuelve a intentarlo." << endl;
+            system("pause");
+            break;
+        }
+    } while (opcion != 4);
+    cout << "¡Gracias por jugar!" << endl;
+    system("pause");
+    system("cls");
+}
+
 int main() {
-    AjustePantalla();
+    system("cls");
+    system("Title Time Paradox");
+    system("Color 0a");
+    ajustePantalla();
     cargarPortada();
-    //system("Title Time Paradox");
-    //system("Color 4a");
+    menuPrincipal();
     //system("cls");
     //system("pause");
     return 0;
