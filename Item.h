@@ -18,8 +18,9 @@ class Item{
     void setNombre(std::string);
     void setDescripcion(std::string);
 
-    // Método
+    // Métodos
     virtual std::string mostrar(); // Regresa un string de todos los atributos
+    friend std::ostream& operator <<(std::ostream&, Item&); // Método de sobrecarga
 
     private:
     int numUsos;
@@ -52,5 +53,12 @@ std::string Item :: mostrar(){
     std::string mensaje;
     mensaje = "Nombre: " + getNombre() + ". Usos faltantes: " + std::to_string(getNumUsos()) + ". Descripcion: " + getDescripcion();
     return mensaje;
+}
+
+std::ostream& operator<<(std::ostream& os, Item& otro){
+    std::string mensaje;
+    mensaje = otro.mostrar();
+    std::cout << mensaje << std::endl;
+    return std::cout;
 }
 #endif

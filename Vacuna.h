@@ -14,6 +14,7 @@ class Vacuna: public Item{
 
     // Métodos
     void usarVacuna();
+    std::string mostrar();
 
     private:
     int magnitud;
@@ -45,6 +46,13 @@ void Vacuna :: usarVacuna(){
         // Destruir Item
         //Item::~Item();
     }
+}
+
+std::string Vacuna :: mostrar(){
+    std::string mensaje, a;
+    a = Item::mostrar();
+    mensaje = a + "| Magnitud: " + std::to_string(getMagnitud());
+    return mensaje;
 }
 
 #endif

@@ -14,6 +14,7 @@ class Arma: public Item{
 
     // Métodos
     void usarArma();
+    std::string mostrar();
 
     private:
     int danio;
@@ -45,6 +46,15 @@ void Arma :: usarArma(){
         // Destruir Item
        //Item::~Item();
     }
+}
+
+// Métodos
+
+std::string Arma :: mostrar(){
+    std::string mensaje, a;
+    a = Item::mostrar();
+    mensaje = a + "| Daño del arma: " + std::to_string(getDanio());
+    return mensaje;
 }
 
 #endif

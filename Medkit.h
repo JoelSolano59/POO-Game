@@ -14,6 +14,7 @@ class Medkit: public Item{
 
     // Métodos
     void usarMedkit();
+    std::string mostrar();
 
     private:
     int magnitud;
@@ -46,6 +47,13 @@ void Medkit :: usarMedkit(){
         // Destruir Item
         //Item::~Item();
     }
+}
+
+std::string Medkit :: mostrar(){
+    std::string mensaje, a;
+    a = Item::mostrar();
+    mensaje = a + "| Restablece " + std::to_string(getMagnitud()) + " de vida.";
+    return mensaje;
 }
 
 #endif
