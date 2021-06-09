@@ -6,18 +6,21 @@ private:
     int posicionJugador; //1[Sala principal] - 2[Oficina] - 3[Seguridad] - 4[Enfermeria] - 5[Time Machine]
     bool luz; //false - Apagado, true - Encendido
     bool puerta[3]; //false - Cerrada, true - Abierta
+    std::string objetivo; //Objetivo actual del jugador
 public:
     Game();
-    Game(int, bool, bool);
+    Game(int, bool, bool, std::string);
     ~Game();
 
     int getPosicionJugador() const;
     bool getLuz() const;
     bool getPuerta(int) const;
+    std::string getObjetivo() const;
 
     void setPosicionJugador(int);
     void setLuz(bool);
     void setPuerta(int, bool);
+    void setObjetivo(std::string);
 
     void salaPrincipal(); //Acceder a la habitacion Sala Principal.
     void oficina(); //Acceder a la habitacion Oficina.
@@ -29,8 +32,6 @@ public:
     void mensajes(); //Acceder a Computadora > Mensajes.
     void correo(); //Acceder a Computadora > Correo.
     void navegador(); //Acceder a Computadora > Navegador.
-
-    void objetivos(); //Muestra los objetivos a completar.
 };
 
 Game::Game(){
@@ -39,14 +40,16 @@ Game::Game(){
     puerta[0] = false; //Empieza la puerta[0] cerrada.
     puerta[1] = false; //Empieza la puerta[1] cerrada.
     puerta[2] = false; //Empieza la puerta[2] cerrada.
+    objetivo = "-"; //Empieza sin ningun objetivo.
 }
 
-Game::Game(int pj, bool l, bool p){
+Game::Game(int pj, bool l, bool p, std::string o){
     posicionJugador = pj;
     luz = l;
     puerta[0] = p;
     puerta[1] = p;
     puerta[2] = p;
+    objetivo = o;
 }
 
 Game::~Game(){}
@@ -73,6 +76,14 @@ bool Game::getPuerta(int np) const {
 
 void Game::setPuerta(int np, bool p){
     puerta[np] = p;
+}
+
+std::string Game::getObjetivo(std::string o) const {
+    return objetivo;
+}
+
+void Game::setObjetivo(istd::string o){
+    objetivo = o;
 }
 
 void Game::salaPrincipal(){
@@ -109,10 +120,6 @@ void Game::correo(){
 
 void Game::Game::navegador(){
 
-}
-
-void Game::objetivos(){
-    
 }
 
 #endif

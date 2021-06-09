@@ -30,6 +30,7 @@ using namespace std;
 #include "Vacuna.h"
 #include "Inventario.h"
 #include "Personaje.h"
+#include "Game.h"
 
 
 // La primera función que se llama al momento de correr el juego.
@@ -83,6 +84,28 @@ void cargarPortada(){
     system("cls");
 }
 
+void cargarFase1(){
+    ifstream archivo;
+    string linea;
+    try {
+        if (archivo){
+            archivo.open("./txt/Fase1.txt");
+        } else {
+            throw invalid_argument("Error, no se pudo abrir el archivo: ./txt/Fase1.txt" );
+        }
+    }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+    for(int i=1; i<20; i++){
+        getline(archivo, linea);
+        cout << linea << endl;
+        system("pause");
+    }
+    system("Pause");
+    system("cls");
+}
+
 // Funcion que carga el menu principal del juego, este es llamado despues
 // de la funcion cargarPortada()
 void menuPrincipal(){
@@ -99,6 +122,10 @@ void menuPrincipal(){
         switch (opcion) {
         case 1:
             // Iniciar juego
+            //Game();
+            //Item inventario[10];
+            cargarPortada();
+            cargarFase1();
             break;
         case 2:
             // Como jugar
