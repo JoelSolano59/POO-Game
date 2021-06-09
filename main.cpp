@@ -161,6 +161,8 @@ void menuPrincipal(){
             //} while (opc != 5);
             break;
         case 2:
+            // Creo que para estos case, los podemos hacer en funciones, ya que solamente
+            // desplegan texto.
             // Como jugar
             cout << "* Lee los dialogos que aparecen en consola para conocer tus objetivos." << endl;
             cout << "* Elige entre las diferentes opciones que se te dan a elegir y realiza tu propio camino hasta el final." << endl;
