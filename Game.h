@@ -55,7 +55,12 @@ Game::Game(){
     puerta[3] = false;
     puerta[4] = false;
     objetivo = "-"; //Empieza sin ningun objetivo.
-
+    // Declaramos un new Item en nuestro inventario, para tenerlo vacio.
+    // Por una razón, en el private el arreglo no se encuentra con 10
+    // Items.
+    for(int i=0; i<10; i++){
+        inventario[i] = new Item(0, "--", "----");
+    }
 }
 
 Game::Game(std::string pj, bool l, bool p, std::string o){
@@ -86,7 +91,6 @@ void Game :: revisarLlave(std::string color, int habitacion){
     std::string temp;
     // Recorrer por el inventario, para revisar si cuenta con la llave del color esp.
     for(int i=0; i<10; i++){
-        std::cout << "Estamos en el dynamic cast" << std::endl;
         //Dynamic cast por un objeto Llave
         if(Llave* c=dynamic_cast<Llave*>(inventario[i])){
             temp = c -> getColor();
@@ -95,7 +99,6 @@ void Game :: revisarLlave(std::string color, int habitacion){
             }
         }
     }
-    std::cout << "Fuera del for en dynamic cast" << std::endl;
 }
 
 // Habitaciomes

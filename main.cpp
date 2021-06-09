@@ -344,8 +344,6 @@ void menuPrincipal()
           if(juego.getPuerta(2) == false){
               juego.revisarLlave("gris", 2);
           }
-          cout << "!!!" << endl;
-
           if (juego.seguridad() == true){
             juego.setLuz(true);
             
