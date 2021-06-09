@@ -32,6 +32,15 @@ using namespace std;
 #include "Personaje.h"
 #include "Game.h"
 
+// Función que imprime texto char por char con velocidad establecida.
+void impresion(std::string texto){
+    for(char const &c: texto){
+        std::cout << c;
+        Sleep(10);
+    }
+    cout << endl;
+}
+
 
 // La primera función que se llama al momento de correr el juego.
 // Este avisa al usuario de como debe de quedar la pantalla.
@@ -99,8 +108,9 @@ void cargarFase1(){
     }
     for(int i=1; i<19; i++){
         getline(archivo, linea);
-        cout << linea << endl;
-        Sleep(2000);
+        //cout << linea << endl;
+        impresion(linea);
+        Sleep(1000);
     }
     system("Pause");
     system("cls");
