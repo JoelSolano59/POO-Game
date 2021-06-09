@@ -3,21 +3,21 @@
 
 class Game{
 private:
-    int posicionJugador; //1[Sala principal] - 2[Oficina] - 3[Seguridad] - 4[Enfermeria] - 5[Time Machine]
+    std::string posicionJugador; //1[Sala principal] - 2[Oficina] - 3[Seguridad] - 4[Enfermeria] - 5[Time Machine]
     bool luz; //false - Apagado, true - Encendido
     bool puerta[3]; //false - Cerrada, true - Abierta
     std::string objetivo; //Objetivo actual del jugador
 public:
     Game();
-    Game(int, bool, bool, std::string);
+    Game(std::string, bool, bool, std::string);
     ~Game();
 
-    int getPosicionJugador() const;
+    std::string getPosicionJugador() const;
     bool getLuz() const;
     bool getPuerta(int) const;
     std::string getObjetivo() const;
 
-    void setPosicionJugador(int);
+    void setPosicionJugador(std::string);
     void setLuz(bool);
     void setPuerta(int, bool);
     void setObjetivo(std::string);
@@ -35,7 +35,7 @@ public:
 };
 
 Game::Game(){
-    posicionJugador = 1; //Empieza en la sala principal.
+    posicionJugador = "Sala principal"; //Empieza en la sala principal.
     luz = false; //Empieza con la luz apagada.
     puerta[0] = false; //Empieza la puerta[0] cerrada.
     puerta[1] = false; //Empieza la puerta[1] cerrada.
@@ -43,7 +43,7 @@ Game::Game(){
     objetivo = "-"; //Empieza sin ningun objetivo.
 }
 
-Game::Game(int pj, bool l, bool p, std::string o){
+Game::Game(std::string pj, bool l, bool p, std::string o){
     posicionJugador = pj;
     luz = l;
     puerta[0] = p;
@@ -54,11 +54,11 @@ Game::Game(int pj, bool l, bool p, std::string o){
 
 Game::~Game(){}
 
-int Game::getPosicionJugador() const {
+std::string Game::getPosicionJugador() const {
     return posicionJugador;
 }
 
-void Game::setPosicionJugador(int pj){
+void Game::setPosicionJugador(std::string pj){
     posicionJugador = pj;
 }
 
@@ -78,11 +78,11 @@ void Game::setPuerta(int np, bool p){
     puerta[np] = p;
 }
 
-std::string Game::getObjetivo(std::string o) const {
+std::string Game::getObjetivo() const {
     return objetivo;
 }
 
-void Game::setObjetivo(istd::string o){
+void Game::setObjetivo(std::string o){
     objetivo = o;
 }
 
@@ -118,7 +118,7 @@ void Game::correo(){
 
 }
 
-void Game::Game::navegador(){
+void Game::navegador(){
 
 }
 

@@ -97,10 +97,10 @@ void cargarFase1(){
     catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
     }
-    for(int i=1; i<20; i++){
+    for(int i=1; i<19; i++){
         getline(archivo, linea);
         cout << linea << endl;
-        system("pause");
+        Sleep(2000);
     }
     system("Pause");
     system("cls");
@@ -112,29 +112,83 @@ void menuPrincipal(){
     int opcion = 0;
     do {
         system("cls");
-        cout << "Menu principal: " << endl;
+        cout << "Menu principal: " << endl << endl;
         cout << "1) Iniciar juego." << endl;
         cout << "2) Como jugar." << endl;
-        cout << "3) Datos personales." << endl;
+        cout << "3) Datos de entrega." << endl;
         cout << "4) Salir del juego." << endl;
         cin >> opcion;
         system("cls");
-        switch (opcion) {
+        switch (opcion){
         case 1:
             // Iniciar juego
-            //Game();
-            //Item inventario[10];
-            cargarPortada();
+            //Game juego;
+            //int opc = 0;
+            for (size_t i = 3; i > 0; i--){
+                cout << "Iniciando juego... " << i << endl;
+                Sleep(1000);
+                system("cls");
+            }
+            system("Color 0F");
             cargarFase1();
+            //do{
+                //cout << "Actualmente te encuentras en: " << juego.getPosicionJugador() << endl;
+                cout << "¿A donde quisieras ir?" << endl << endl;
+                cout << "1) Sala principal." << endl;
+                cout << "2) Oficina." << endl;
+                cout << "3) Seguridad." << endl;
+                cout << "4) Enfermeria." << endl;
+                cout << "5) Maquina del tiempo." << endl;
+                // switch (opc){
+                // case 1:
+                //     //juego.salaPrincipal();
+                //     break;
+                // case 2:
+                //     //juego.oficina();
+                //     break;
+                // case 3:
+                //     //juego.seguridad();
+                //     break;
+                // case 4:
+                //     //juego.enfermeria();
+                //     break;
+                // case 5:
+                //     //juego.timeMachine();
+                //     break;
+                // default:
+                //     break;
+                // }
+            //} while (opc != 5);
             break;
         case 2:
             // Como jugar
+            cout << "* Lee los dialogos que aparecen en consola para conocer tus objetivos." << endl;
+            cout << "* Elige entre las diferentes opciones que se te dan a elegir y realiza tu propio camino hasta el final." << endl;
+            cout << "* Ingresa numeros diferentes a las opciones que se te presentan en pantalla y descubre grandes secretos." << endl;
+            cout << "* Pelea contra enemigos y utiliza difernentes estrategias para derribarlos." << endl;
+            cout << "* Busca items ocultos en las habitaciones que te ayudaran mas a delante en tu aventura." << endl;
+            cout << "* Resuleve diferentes acertijos para poder avanzar en el juego." << endl;
+            system("pause");
             break;    
         case 3:
             // Datos personales
+            cout << "P.O.O | Situación Problema, Videojuego Time Paradox" << endl << endl;
+            cout << "Autores:" << endl;
+            cout << "- Joel Isaias Solano Ocampo | A01639289" << endl;
+            cout << "- Jeshua Nava Avila | A01639282" << endl << endl;
+            cout << "Matería y profesor:" << endl;
+            cout << "- Programación Orientada a Objetos (Gpo11)" << endl;
+            cout << "- Fabiola Uribe Plata" << endl << endl;
+            cout << "Fecha de entrega:" << endl;
+            cout << "- 11/06/2021" << endl;
+            cout << "Fecha de última actualización:" << endl;
+            cout << "- 07/06/2021" << endl << endl;
+            system("pause");
             break;
         case 4:
             // Salir del juego
+            cout << "¡Gracias por jugar!" << endl;
+            system("pause");
             break;
         default:
             // Opcion default
@@ -143,15 +197,13 @@ void menuPrincipal(){
             break;
         }
     } while (opcion != 4);
-    cout << "¡Gracias por jugar!" << endl;
-    system("pause");
     system("cls");
 }
 
 int main() {
     system("cls");
     system("Title Time Paradox");
-    system("Color 0a");
+    system("Color 0B");
     ajustePantalla();
     cargarPortada();
     menuPrincipal();
