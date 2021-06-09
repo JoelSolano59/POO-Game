@@ -45,6 +45,7 @@ void impresion(std::string texto){
 // La primera función que se llama al momento de correr el juego.
 // Este avisa al usuario de como debe de quedar la pantalla.
 void ajustePantalla(){
+    system("Color 0f");
     ifstream archivo;
     string linea;
     try {
