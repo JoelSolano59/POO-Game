@@ -1,6 +1,12 @@
 #ifndef Game_h
 #define Game_h
-
+// CLases
+#include "Arma.h"
+#include "Medkit.h"
+#include "Llave.h"
+#include "Vacuna.h"
+#include "Inventario.h"
+#include "Personaje.h"
 class Game{
 private:
     std::string posicionJugador; //0 [Sala principal] - 1 [Oficina] - 2 [Seguridad] - 3 [Enfermeria] - 4 [Time Machine]
@@ -13,26 +19,31 @@ public:
     Game(std::string, bool, bool, std::string);
     ~Game();
 
+    // Getters y Setters
     std::string getPosicionJugador() const;
     bool getLuz() const;
     bool getPuerta(int) const;
     std::string getObjetivo() const;
-
     void setPosicionJugador(std::string);
     void setLuz(bool);
     void setPuerta(int, bool);
     void setObjetivo(std::string);
 
+    // Habitaciones
     void salaPrincipal(); //Acceder a la habitacion Sala Principal.
     void oficina(); //Acceder a la habitacion Oficina.
-    void seguridad(); //Acceder a la habitacion Seguridad.
-    void enfermeria(); //Acceder a la habitacion Enfermeria.
-    void timeMachine(); //Habitacion final del juego (Salida).
+    bool seguridad(); //Acceder a la habitacion Seguridad.
+    bool enfermeria(); //Acceder a la habitacion Enfermeria.
+    bool timeMachine(); //Habitacion final del juego (Salida).
 
+    // Oficina
     void programas(); //Acceder a Computadora > Programas.
     void mensajes(); //Acceder a Computadora > Mensajes.
     void correo(); //Acceder a Computadora > Correo.
     void navegador(); //Acceder a Computadora > Navegador.
+
+    // Métodos
+    void revisarLlave(std::string, int);
 };
 
 Game::Game(){
@@ -44,6 +55,7 @@ Game::Game(){
     puerta[3] = false;
     puerta[4] = false;
     objetivo = "-"; //Empieza sin ningun objetivo.
+
 }
 
 Game::Game(std::string pj, bool l, bool p, std::string o){
@@ -59,56 +71,73 @@ Game::Game(std::string pj, bool l, bool p, std::string o){
 
 Game::~Game(){}
 
-std::string Game::getPosicionJugador() const {
-    return posicionJugador;
+// Getters y Setters
+std::string Game::getPosicionJugador() const {return posicionJugador;}
+void Game::setPosicionJugador(std::string pj){posicionJugador = pj;}
+bool Game::getLuz() const {return luz;}
+void Game::setLuz(bool l){luz = l;}
+bool Game::getPuerta(int np) const {return puerta[np];}
+void Game::setPuerta(int np, bool p){puerta[np] = p;}
+std::string Game::getObjetivo() const {return objetivo;}
+void Game::setObjetivo(std::string o){objetivo = o;}
+
+// Métodos
+void Game :: revisarLlave(std::string color, int habitacion){
+    std::string temp;
+    // Recorrer por el inventario, para revisar si cuenta con la llave del color esp.
+    for(int i=0; i<10; i++){
+        std::cout << "Estamos en el dynamic cast" << std::endl;
+        //Dynamic cast por un objeto Llave
+        if(Llave* c=dynamic_cast<Llave*>(inventario[i])){
+            temp = c -> getColor();
+            if(color == temp){
+                setPuerta(habitacion, true);
+            }
+        }
+    }
+    std::cout << "Fuera del for en dynamic cast" << std::endl;
 }
 
-void Game::setPosicionJugador(std::string pj){
-    posicionJugador = pj;
-}
-
-bool Game::getLuz() const {
-    return luz;
-}
-
-void Game::setLuz(bool l){
-    luz = l;
-}
-
-bool Game::getPuerta(int np) const {
-    return puerta[np];
-}
-
-void Game::setPuerta(int np, bool p){
-    puerta[np] = p;
-}
-
-std::string Game::getObjetivo() const {
-    return objetivo;
-}
-
-void Game::setObjetivo(std::string o){
-    objetivo = o;
-}
-
+// Habitaciomes
 void Game::salaPrincipal(){
-
+    setPosicionJugador("Sala Principal");
 }
 
 void Game::oficina(){
-
+    setPosicionJugador("Oficina");
 }
 
-void Game::seguridad(){
-
+bool Game::seguridad(){
+    if(puerta[2] == true){
+        // está dentro de seguridad
+        setPosicionJugador("Seguridad");
+        return true;
+    } else {
+        std::cout << "Se encuentra cerrado. Ocupas la llave de color gris" << endl;
+        return false;
+    }
 }
 
-void Game::enfermeria(){
-
+bool Game::enfermeria(){
+    if(puerta[3] == true){
+        // está dentro de enfermeria
+        setPosicionJugador("Enfermeria");
+        return true;
+    } else {
+        std::cout << "Se encuentra cerrado. Ocupas la llave de color rojo" << endl;
+        return false;
+    }
 }
 
-void Game::timeMachine(){
-
+bool Game::timeMachine(){
+    if(puerta[4] == true){
+        // está dentro de time machine
+        setPosicionJugador("Time Machine");
+        return true;
+    } else {
+        std::cout << "Se encuentra cerrado. Ocupas la llave de color negro" << endl;
+        return false;
+    }
 }
 
 void Game::programas(){
