@@ -3,10 +3,11 @@
 
 class Game{
 private:
-    std::string posicionJugador; //1[Sala principal] - 2[Oficina] - 3[Seguridad] - 4[Enfermeria] - 5[Time Machine]
+    std::string posicionJugador; //0 [Sala principal] - 1 [Oficina] - 2 [Seguridad] - 3 [Enfermeria] - 4 [Time Machine]
     bool luz; //false - Apagado, true - Encendido
-    bool puerta[3]; //false - Cerrada, true - Abierta
+    bool puerta[5]; //false - Cerrada, true - Abierta
     std::string objetivo; //Objetivo actual del jugador
+    Item *inventario[10]; // Arreglo de inventario, polimórfico
 public:
     Game();
     Game(std::string, bool, bool, std::string);
@@ -37,9 +38,11 @@ public:
 Game::Game(){
     posicionJugador = "Sala principal"; //Empieza en la sala principal.
     luz = false; //Empieza con la luz apagada.
-    puerta[0] = false; //Empieza la puerta[0] cerrada.
-    puerta[1] = false; //Empieza la puerta[1] cerrada.
+    puerta[0] = true; //Empieza la puerta[0] cerrada.
+    puerta[1] = true; //Empieza la puerta[1] cerrada.
     puerta[2] = false; //Empieza la puerta[2] cerrada.
+    puerta[3] = false;
+    puerta[4] = false;
     objetivo = "-"; //Empieza sin ningun objetivo.
 }
 
@@ -49,6 +52,8 @@ Game::Game(std::string pj, bool l, bool p, std::string o){
     puerta[0] = p;
     puerta[1] = p;
     puerta[2] = p;
+    puerta[3] = p;
+    puerta[4] = p;
     objetivo = o;
 }
 

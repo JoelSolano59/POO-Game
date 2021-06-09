@@ -23,7 +23,7 @@ Fecha de última actualización:
 #include <windows.h>
 #include <fstream>
 using namespace std;
-// Clases hijas que agregan a las clases padres
+// Clases 
 #include "Arma.h"
 #include "Medkit.h"
 #include "Llave.h"
@@ -31,6 +31,8 @@ using namespace std;
 #include "Inventario.h"
 #include "Personaje.h"
 #include "Game.h"
+
+
 
 // Función que imprime texto char por char con velocidad establecida.
 void impresion(std::string texto){
@@ -41,7 +43,6 @@ void impresion(std::string texto){
     cout << endl;
 }
 
-
 // La primera función que se llama al momento de correr el juego.
 // Este avisa al usuario de como debe de quedar la pantalla.
 void ajustePantalla(){
@@ -51,6 +52,11 @@ void ajustePantalla(){
     try {
         if (archivo){
             archivo.open("./txt/AjustePantalla.txt");
+            while(getline(archivo, linea)){
+            cout << linea << endl;
+            }
+        system("Pause");
+        system("cls");
         } else {
             throw invalid_argument("Error, no se pudo abrir el archivo: ./txt/AjustePantalla.txt" );
         }
@@ -58,21 +64,29 @@ void ajustePantalla(){
     catch(const std::exception& e){
         std::cerr << e.what() << '\n';
     }
-    while(getline(archivo, linea)){
-        cout << linea << endl;
-    }
-    system("Pause");
-    system("cls");
 }
 
 // Función que carga la portada del juego, este es llamado después 
 // de la función AjustePantalla()
 void cargarPortada(){
+    system("Color 0e");
     ifstream archivo;
     string linea;
     try {
         if (archivo){
             archivo.open("./txt/Portada.txt");
+            for(int i=1; i<26; i++){
+                getline(archivo, linea);
+                if(i<10){
+                    cout << linea << endl;
+                    Sleep(350);
+                } else{
+                    cout << linea << endl;
+                    Sleep(50);
+                }
+            }
+            system("Pause");
+            system("cls");
         } else {
             throw invalid_argument("Error, no se pudo abrir el archivo: ./txt/Portada.txt" );
         }
@@ -80,26 +94,22 @@ void cargarPortada(){
     catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
     }
-    for(int i=1; i<26; i++){
-        getline(archivo, linea);
-        if(i<10){
-            cout << linea << endl;
-            Sleep(350);
-        } else{
-            cout << linea << endl;
-            Sleep(50);
-        }
-    }
-    system("Pause");
-    system("cls");
 }
 
+// Carga el texto Fase1.
 void cargarFase1(){
     ifstream archivo;
     string linea;
     try {
         if (archivo){
             archivo.open("./txt/Fase1.txt");
+            for(int i=1; i<19; i++){
+                getline(archivo, linea);
+                impresion(linea);
+                Sleep(1200);
+            }
+            system("Pause");
+            system("cls");
         } else {
             throw invalid_argument("Error, no se pudo abrir el archivo: ./txt/Fase1.txt" );
         }
@@ -107,19 +117,73 @@ void cargarFase1(){
     catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
     }
-    for(int i=1; i<19; i++){
-        getline(archivo, linea);
-        //cout << linea << endl;
-        impresion(linea);
-        Sleep(1000);
+}
+
+// Función que desplega texto en como jugar.
+void comoJugar(){
+    cout << "* Lee los dialogos que aparecen en consola para conocer tus objetivos." << endl;
+    cout << "* Elige entre las diferentes opciones que se te dan a elegir y realiza tu propio camino hasta el final." << endl;
+    cout << "* Ingresa opciones diferentes a las que se te presentan en pantalla y descubre grandes secretos :)." << endl;
+    cout << "* Pelea contra enemigos y utiliza difernentes estrategias para derribarlos." << endl;
+    cout << "* Busca items ocultos en las habitaciones que te ayudaran mas a delante en tu aventura." << endl;
+    cout << "* Resuleve diferentes acertijos para poder avanzar en el juego." << endl;
+    system("pause");
+}
+
+// Función que muestra los datos del juego.
+void datosEntrega(){
+    cout << "P.O.O | Situación Problema, Videojuego Time Paradox" << endl << endl;
+    cout << "Autores:" << endl;
+    cout << "- Joel Isaias Solano Ocampo | A01639289" << endl;
+    cout << "- Jeshua Nava Avila | A01639282" << endl << endl;
+    cout << "Matería y profesor:" << endl;
+    cout << "- Programación Orientada a Objetos (Gpo11)" << endl;
+    cout << "- Fabiola Uribe Plata" << endl << endl;
+    cout << "Fecha de entrega:" << endl;
+    cout << "- 11/06/2021" << endl;
+    cout << "Fecha de última actualización:" << endl;
+    cout << "- 07/06/2021" << endl << endl;
+    system("pause");
+}
+
+// Carga un archivo diálogo deseado.
+void cargarArchivoDialogo(string path, int renglones){
+    system("Color 0f");
+    ifstream archivo;
+    string linea;
+    try {
+        if (archivo){
+            archivo.open(path);
+            for(int i=0; i<renglones; i++){
+                getline(archivo, linea);
+                impresion(linea);
+                Sleep(1000);
+            }
+            system("Pause");
+            system("cls");
+        } else {
+            throw invalid_argument("Error, no se pudo abrir el archivo:" + path);
+        }
     }
-    system("Pause");
-    system("cls");
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+// Revisa si las luces están prendidas o apagadas.
+// De acuerdo a esto, el texto y fondo cambia.
+void revisaLuz(Game logic){
+    if(logic.getLuz() == true){
+        system("Color 0f");
+    } else{
+        system("Color 5c");
+    }
 }
 
 // Funcion que carga el menu principal del juego, este es llamado despues
 // de la funcion cargarPortada()
 void menuPrincipal(){
+    Game juego; // Moví el objeto game aquí
     int opcion = 0;
     do {
         system("cls");
@@ -133,70 +197,55 @@ void menuPrincipal(){
         switch (opcion){
         case 1:
             // Iniciar juego
-            //Game juego;
-            //int opc = 0;
+            char opc;
             for (size_t i = 3; i > 0; i--){
                 cout << "Iniciando juego... " << i << endl;
                 Sleep(1000);
                 system("cls");
             }
+            // Iniciamos parámetros iniciales del juego, y comienza.
+            bool puertas[5] = {true, true, false, false, false}; // Habitaciones cerradas y abiertas.
             system("Color 0F");
             cargarFase1();
-            //do{
-                //cout << "Actualmente te encuentras en: " << juego.getPosicionJugador() << endl;
+            cargarArchivoDialogo("./txt/lucesApagadas.txt", 6);
+            do{
+                system("cls");
+                revisaLuz(juego);
+                cout << "Actualmente te encuentras en: " << juego.getPosicionJugador() << endl;
                 cout << "¿A donde quisieras ir?" << endl << endl;
-                cout << "1) Sala principal." << endl;
-                cout << "2) Oficina." << endl;
-                cout << "3) Seguridad." << endl;
-                cout << "4) Enfermeria." << endl;
-                cout << "5) Maquina del tiempo." << endl;
-                // switch (opc){
-                // case 1:
-                //     //juego.salaPrincipal();
-                //     break;
-                // case 2:
-                //     //juego.oficina();
-                //     break;
-                // case 3:
-                //     //juego.seguridad();
-                //     break;
-                // case 4:
-                //     //juego.enfermeria();
-                //     break;
-                // case 5:
-                //     //juego.timeMachine();
-                //     break;
-                // default:
-                //     break;
-                // }
-            //} while (opc != 5);
+                cout << "a) Sala principal." << endl;
+                cout << "b) Oficina." << endl;
+                cout << "c) Seguridad." << endl;
+                cout << "d) Enfermeria." << endl;
+                cout << "e) Maquina del tiempo." << endl;
+                cin >> opc;
+                switch (opc){
+                case 'a':
+                    juego.salaPrincipal();
+                    break;
+                case 'b':
+                     juego.oficina();
+                     break;
+                case 'c':
+                     juego.seguridad();
+                     juego.setLuz(true);
+                     break;
+                case 'd':
+                     juego.enfermeria();
+                     break;
+                case 'e':
+                     juego.timeMachine();
+                     break;
+                default:
+                     break;
+                 }
+            } while (opc != 5);
             break;
         case 2:
-            // Creo que para estos case, los podemos hacer en funciones, ya que solamente
-            // desplegan texto.
-            // Como jugar
-            cout << "* Lee los dialogos que aparecen en consola para conocer tus objetivos." << endl;
-            cout << "* Elige entre las diferentes opciones que se te dan a elegir y realiza tu propio camino hasta el final." << endl;
-            cout << "* Ingresa numeros diferentes a las opciones que se te presentan en pantalla y descubre grandes secretos." << endl;
-            cout << "* Pelea contra enemigos y utiliza difernentes estrategias para derribarlos." << endl;
-            cout << "* Busca items ocultos en las habitaciones que te ayudaran mas a delante en tu aventura." << endl;
-            cout << "* Resuleve diferentes acertijos para poder avanzar en el juego." << endl;
-            system("pause");
+            comoJugar();
             break;    
         case 3:
-            // Datos personales
-            cout << "P.O.O | Situación Problema, Videojuego Time Paradox" << endl << endl;
-            cout << "Autores:" << endl;
-            cout << "- Joel Isaias Solano Ocampo | A01639289" << endl;
-            cout << "- Jeshua Nava Avila | A01639282" << endl << endl;
-            cout << "Matería y profesor:" << endl;
-            cout << "- Programación Orientada a Objetos (Gpo11)" << endl;
-            cout << "- Fabiola Uribe Plata" << endl << endl;
-            cout << "Fecha de entrega:" << endl;
-            cout << "- 11/06/2021" << endl;
-            cout << "Fecha de última actualización:" << endl;
-            cout << "- 07/06/2021" << endl << endl;
-            system("pause");
+            datosEntrega();
             break;
         case 4:
             // Salir del juego
