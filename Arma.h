@@ -6,7 +6,7 @@ class Arma: public Item{
     public: 
     // Constructores
     Arma();
-    Arma(int, int, std::string, std::string);
+    Arma(int, int, std::string, std::string); // int daño, int numUsos, string nombre, string descripción
 
     // Getters y Setters
     int getDanio() const;

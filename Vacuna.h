@@ -6,7 +6,7 @@ class Vacuna: public Item{
     public:
     // Constructores
     Vacuna();
-    Vacuna(int, int, std::string, std::string);
+    Vacuna(int, int, std::string, std::string); // int magnitud, int numUsso, string nombre, string descripción
 
     // Getters y Setters
     int getMagnitud() const;
