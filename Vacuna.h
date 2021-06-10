@@ -11,6 +11,8 @@ class Vacuna: public Item{
     // Getters y Setters
     int getMagnitud() const;
     void setMagnitud(int);
+    bool getEstado() const;
+    void setEstado(bool);
 
     // Métodos
     void usarVacuna();
@@ -18,6 +20,7 @@ class Vacuna: public Item{
 
     private:
     int magnitud;
+    bool estado;
 };
 
 // Constructores
