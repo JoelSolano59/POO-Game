@@ -249,6 +249,7 @@ void cargarComputadora(string path)
 void menuPrincipal()
 {
   Game juego; // Moví el objeto game aquí
+  bool exit = false;
   int opcion = 0;
   do
   {
@@ -390,6 +391,7 @@ void menuPrincipal()
               }
             } while (seg != 'd');
           }
+          system("pause");
           break;
         case 'd':
           char enf;
@@ -444,6 +446,7 @@ void menuPrincipal()
               }
             } while (enf != 'd');
           }
+          system("pause");
           break;
         case 'e':
           char mt;
@@ -535,14 +538,16 @@ void menuPrincipal()
               system("pause");
             }
           }
+          exit = true;
           break;
         default:
           cout << "Si fuera asi de facil, ya estarias durmiendo en tu casa ¿No crees?" << endl;
           system("pause");
           break;
         }
-      } while (opc != 'e');
+      } while (opc != 'e' && exit != true);
       break;
+      system("pause");
     case 2:
       comoJugar();
       break;
