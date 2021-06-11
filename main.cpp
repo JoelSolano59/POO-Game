@@ -446,7 +446,6 @@ void menuPrincipal()
                 juego.ingresarLlave("negro", 1, "Llave negra", "Una llave de color negro, abre el cuarto time machien.");
               case 'd':
                 juego.salaPrincipal();
-                system("pause");
                 break;
               default:
                 cout << "Enfermeria, si estas aqui es porque posiblemente estes herido. Vaya noche tan mas larga." << endl;
