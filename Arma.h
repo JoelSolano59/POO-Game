@@ -13,7 +13,6 @@ class Arma: public Item{
     void setDanio(int);
 
     // Métodos
-    void usarArma();
     std::string mostrar();
 
     private:
@@ -33,20 +32,6 @@ Arma :: Arma(int dan, int usos, std::string name, std::string desc): Item(usos, 
 int Arma :: getDanio() const{return danio;}
 void Arma :: setDanio(int dan){danio = dan;}
 
-// Métodos
-void Arma :: usarArma(){
-    // Cada vez que el usario use un arma, este le restara al número de usos.
-    int cantUsos = Item::getNumUsos();
-    cantUsos -= 1;
-    Item::setNumUsos(cantUsos);
-    // Tendrá que realizar daño a un personaje
-    //
-    //
-    if(cantUsos <= 0){
-        // Destruir Item
-       //Item::~Item();
-    }
-}
 
 // Métodos
 

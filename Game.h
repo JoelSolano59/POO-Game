@@ -5,8 +5,6 @@
 #include "Medkit.h"
 #include "Llave.h"
 #include "Vacuna.h"
-#include "Inventario.h"
-#include "Personaje.h"
 class Game{
 private:
     std::string posicionJugador; //0 [Sala principal] - 1 [Oficina] - 2 [Seguridad] - 3 [Enfermeria] - 4 [Time Machine]
@@ -276,7 +274,7 @@ void Game :: mostrarInventario(){
 }
 
 void Game::usarMedkit(){
-    setVidaPer(vidaPer + 10);
+    setVidaPer(vidaPer + 20);
 }
 
 int Game::usarVacuna(){

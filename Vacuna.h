@@ -15,7 +15,6 @@ class Vacuna: public Item{
     void setEstado(bool);
 
     // Métodos
-    void usarVacuna();
     std::string mostrar();
 
     private:
@@ -37,20 +36,6 @@ int Vacuna :: getMagnitud() const{return magnitud;}
 void Vacuna :: setMagnitud(int mag){magnitud = mag;}
 
 // Métodos
-void Vacuna :: usarVacuna(){
-    // Cada vez que el usario use la vacuna, este le restara al número de usos.
-    int cantUsos = Item::getNumUsos();
-    cantUsos -= 1;
-    Item::setNumUsos(cantUsos);
-    // Tendrá que realizar su efecto a un personaje
-    //
-    //
-    if(cantUsos <= 0){
-        // Destruir Item
-        //Item::~Item();
-    }
-}
-
 std::string Vacuna :: mostrar(){
     std::string mensaje, a;
     a = Item::mostrar();

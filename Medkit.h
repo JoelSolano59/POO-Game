@@ -13,7 +13,6 @@ class Medkit: public Item{
     void setMagnitud(int);
 
     // Métodos
-    void usarMedkit();
     std::string mostrar();
 
     private:
@@ -35,20 +34,6 @@ int Medkit :: getMagnitud() const{return magnitud;}
 void Medkit :: setMagnitud(int mag){magnitud = mag;}
 
 // Métodos
-void Medkit :: usarMedkit(){
-    // Cada vez que el usario use un medkit, este le restara al número de usos.
-    int cantUsos = Item::getNumUsos();
-    cantUsos -= 1;
-    Item::setNumUsos(cantUsos);
-    // Tendrá que curar al personaje
-    //
-    //
-    if(cantUsos <= 0){
-        // Destruir Item
-        //Item::~Item();
-    }
-}
-
 std::string Medkit :: mostrar(){
     std::string mensaje, a;
     a = Item::mostrar();

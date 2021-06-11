@@ -256,6 +256,7 @@ void menuPrincipal()
   bool exit = false;
   int opcion = 0;
   int vac = 0;
+  int usos = 10;
   do
   {
     system("cls");
@@ -281,8 +282,8 @@ void menuPrincipal()
       // Iniciamos parámetros iniciales del juego, y comienza.
       //bool puertas[5] = {true, true, false, false, false}; // Habitaciones cerradas y abiertas.
       system("Color 0F");
-      //cargarFase1();
-      //cargarArchivoDialogo("./txt/lucesApagadas.txt", 6);
+      cargarFase1();
+      cargarArchivoDialogo("./txt/lucesApagadas.txt", 6);
       do
       {
         revisaLuz(juego);
@@ -444,6 +445,7 @@ void menuPrincipal()
                 Sleep(1000);
                 cout << "*Guardas la llave negra" << endl;
                 juego.ingresarLlave("negro", 1, "Llave negra", "Una llave de color negro, abre el cuarto time machien.");
+                system("pause");
               case 'd':
                 juego.salaPrincipal();
                 break;
@@ -459,12 +461,13 @@ void menuPrincipal()
         case 'e':
           //Maquina del tiempo
           char mt;
-          int atk;
+          int atkP;
+          int atkE;
           if(juego.getPuerta(4) == false){
             juego.revisarLlave("negro", 4);
           }
           if(juego.timeMachine() == true){
-            cargarArchivoDialogo("./txt/EtapaFinal.txt", 31);
+            cargarArchivoDialogo("./txt/EtapaFinal.txt", 30);
             do {
               revisaLuz(juego);
               system("cls");
@@ -472,7 +475,7 @@ void menuPrincipal()
               cout << "           Vida:   " << juego.getVidaPer() << "/100 HP" << endl << endl;
               cout << "¿Que deseas hacer?" << endl << endl;
               cout << "a) Atacar con puño." << endl;
-              if (juego.revisarArma() == true){
+              if (juego.revisarArma() == true && usos > 0){
                 cout << "b) Atacar con arma." << endl;
               }
               if (juego.revisarMedkit() == true){
@@ -486,17 +489,20 @@ void menuPrincipal()
               system("cls");
               switch (mt){
               case 'a':
-                atk = rand() % 5 + 1;
-                juego.setVidaEne(juego.getVidaEne() - atk - vac);
-                cout << "Haz hecho " << atk + vac << " de daño." << endl;
+                atkP = rand() % 5 + 1;
+                juego.setVidaEne(juego.getVidaEne() - atkP - vac);
+                cout << "Haz hecho " << atkP + vac << " de daño." << endl;
                 system("pause");
                 break;
               case 'b':
-                if (juego.revisarArma() == true){
-                  atk = rand() % 10 + 5;
-                  juego.setVidaEne(juego.getVidaEne() - atk);
-                  cout << "Haz hecho " << atk + vac << " de daño." << endl;
-                } else {
+                if (juego.revisarArma() == true && usos > 0){
+                  atkP = rand() % 10 + 1;
+                  juego.setVidaEne(juego.getVidaEne() - atkP - vac);
+                  cout << "Haz hecho " << atkP + vac << " de daño." << endl;
+                  usos--;
+                } else if (juego.revisarArma() == true && usos <= 0) {
+                  cout << "*Ya no tienes municion*" << endl;
+                } else if (juego.revisarArma() == false) {
                   cout << "No tienes ninguna arma en tu inventario." << endl;
                 }
                 system("pause");
@@ -504,7 +510,7 @@ void menuPrincipal()
               case 'c':
                 if (juego.revisarMedkit() == true){
                   juego.usarMedkit();
-                  cout << "Haz incrementado tu vida a: +10" << endl;
+                  cout << "Haz incrementado tu vida a: +20" << endl;
                   cout << "                      Vida:   " << juego.getVidaPer() << "/100 HP" << endl;
                   juego.ingresarObjVacio("Medkit");
                 }
@@ -528,8 +534,8 @@ void menuPrincipal()
                 break;
               }
               if (mt != 'e'){
-                atk = rand() % 10 + 1;
-                juego.setVidaPer(juego.getVidaPer() - atk - vac);
+                atkE = rand() % 15 + 1;
+                juego.setVidaPer(juego.getVidaPer() - atkE);
                 for (int i = 0; i < 3; i++) {
                   system("Color 40");
                   Sleep(350);
@@ -537,7 +543,7 @@ void menuPrincipal()
                   Sleep(350);
                 }
                 revisaLuz(juego);
-                cout << "Haz recibido " << atk << " de daño." << endl;
+                cout << "Haz recibido " << atkE << " de daño." << endl;
                 system("pause");
               }
             } while (juego.getVidaPer() > 0 && juego.getVidaEne() > 0);
@@ -583,7 +589,7 @@ void menuPrincipal()
       system("pause");
       break;
     }
-  } while (opcion != 4);
+  } while (opcion != 4 && exit == false);
   system("cls");
 }
 
@@ -593,10 +599,8 @@ int main()
   system("cls");
   system("Title Time Paradox");
   system("Color 04");
-  //ajustePantalla();
-  //cargarPortada();
+  ajustePantalla();
+  cargarPortada();
   menuPrincipal();
-  //system("cls");
-  //system("pause");
   return 0;
 }
