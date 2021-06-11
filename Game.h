@@ -45,11 +45,14 @@ public:
     bool revisarVacuna();
     void mostrarInventario();
     // Estos métodos ingresan un objeto hija de Item dentro del inventario
+    void ingresarObjVacio(std::string);
     void ingresarLlave(std::string, int, std::string, std::string);
     void ingresarArma(int, int, std::string, std::string);
     void ingresarMedkit(int, int, std::string, std::string);
     void ingresarVacuna(int, int, std::string, std::string);
 
+    void usarMedkit();
+    int usarVacuna();
 };
 
 Game::Game(){
@@ -80,6 +83,7 @@ Game::Game(std::string pj, bool l, bool p, int vp, int ve){
     puerta[4] = p;
     vidaPer = vp;
     vidaEne = ve;
+    // inventario = intvent;
 }
 
 // Getters y Setters
@@ -153,13 +157,24 @@ bool Game :: revisarVacuna(){
     return false;
 }
 
+void Game :: ingresarObjVacio(std::string name){
+    std::string a;
+    for(int i=0; i<10; i++){
+        a = inventario[i] -> getNombre();
+        if(name == a){
+
+            inventario[i] = new Item(0, "-", "-");        
+        }
+    }
+}
+
 void Game :: ingresarLlave(std::string color, int usos, std::string name, std::string desc){
     int pos;
     pos = posicionDesocupadoInv();
     if(pos != -1){
         inventario[pos] = new Llave(color, usos, name, desc);
     }
-    // Else de un mensaje de que no se pudo ingresar al inventario la llave.
+    // Else no pudo ingresar objeto.
 }
 
 void Game :: ingresarArma(int dano, int usos, std::string name, std::string desc){
@@ -168,7 +183,7 @@ void Game :: ingresarArma(int dano, int usos, std::string name, std::string desc
     if(pos != -1){
         inventario[pos] = new Arma(dano, usos, name, desc);
     }
-    // Else de un mensaje de que no se pudo ingresar al inventario la arma.
+    // Else no pudo ingresar objeto.
 }
 
 void Game :: ingresarMedkit(int magnitud, int usos, std::string name, std::string desc){
@@ -177,6 +192,7 @@ void Game :: ingresarMedkit(int magnitud, int usos, std::string name, std::strin
     if(pos != -1){
         inventario[pos] = new Medkit(magnitud, usos, name, desc);
     }
+    // Else no pudo ingresar objeto.
 }
 
 
@@ -231,8 +247,17 @@ bool Game::timeMachine(){
 }
 
 void Game :: mostrarInventario(){
-    for(int i=0; i<10; i++){
+    for(int i=0; i<6; i++){
         std:: cout << i << ". " << *inventario[i] << endl;
     }
 }
+
+void Game::usarMedkit(){
+    setVidaPer(vidaPer + 10);
+}
+
+int Game::usarVacuna(){
+    return 5;
+}
+
 #endif

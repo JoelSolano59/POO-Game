@@ -18,6 +18,10 @@ Fecha de última actualización:
 */
 
 // Librerías
+#include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
+
 #include <iostream>
 #include <cstdlib>
 #include <windows.h>
@@ -251,6 +255,7 @@ void menuPrincipal()
   Game juego; // Moví el objeto game aquí
   bool exit = false;
   int opcion = 0;
+  int vac = 0;
   do
   {
     system("cls");
@@ -276,12 +281,12 @@ void menuPrincipal()
       // Iniciamos parámetros iniciales del juego, y comienza.
       //bool puertas[5] = {true, true, false, false, false}; // Habitaciones cerradas y abiertas.
       system("Color 0F");
-      cargarFase1();
-      cargarArchivoDialogo("./txt/lucesApagadas.txt", 6);
+      //cargarFase1();
+      //cargarArchivoDialogo("./txt/lucesApagadas.txt", 6);
       do
       {
-        system("cls");
         revisaLuz(juego);
+        system("cls");
         cout << "Actualmente te encuentras en: " << juego.getPosicionJugador() << endl;
         cout << "¿A donde quisieras ir?" << endl << endl;
         cout << "a) Sala principal." << endl;
@@ -294,7 +299,7 @@ void menuPrincipal()
         switch (opc)
         {
         case 'a':
-          cout << "Actualmente ya te encuentras en " << juego.getPosicionJugador() << ". Creo que estas algo perdido Jhon." << endl;
+          cout << "Actualmente ya te encuentras en " << juego.getPosicionJugador() << ". Creo que estas algo perdido Josh." << endl;
           system("pause");
           juego.salaPrincipal();
           break;
@@ -346,6 +351,7 @@ void menuPrincipal()
           } while (ofc != 'f');
           break;
         case 'c':
+          //Seguridad
           char seg;
           // Si la habitación se encuentra cerrada, el juego revisará si tiene la llave
           if(juego.getPuerta(2) == false){
@@ -374,6 +380,8 @@ void menuPrincipal()
                 system("pause");
                 break;
               case 'b':
+                cout << "*Ves las camaras de seguridad y no vez nada sospechoso.*" << endl;
+                impresion("-Josh:  Todo normal, nada fuera de lo comun, muy bien");
                 system("pause");
                 break;
               case 'c':
@@ -383,17 +391,18 @@ void menuPrincipal()
                 system("pause");
               case 'd':
                 juego.salaPrincipal();
-                system("pause");
                 break;
               default:
                 cout << "Seguridad, no es una habitacion cualquiera: armas, camaras de seguridad y llaves de acceso. Para entrar aqui algo no muy bueno de estar sucediendo." << endl;
                 break;
               }
             } while (seg != 'd');
+          } else {
+            system("pause");
           }
-          system("pause");
           break;
         case 'd':
+          //Enfermeria
           char enf;
           // Si la habitación se encuentra cerrada, el juego revisará si tiene la llave
           if(juego.getPuerta(3) == false){
@@ -417,13 +426,13 @@ void menuPrincipal()
               case 'a':
                 cout << "*Observas el medkit de primeros auxilios.*" << endl;
                 impresion("-Josh:  Quizá me pueda servir, lo guardo por si acaso");
-                juego.ingresarMedkit(10, 3, "Medkit", "Medkit de primeros auxilios");
+                juego.ingresarMedkit(10, 1, "Medkit", "Medkit de primeros auxilios");
                 system("pause");
                 break;
               case 'b':
                 cout << "*Te encuentras con una vacuna, con un líquido color rojo*" << endl;
                 impresion("-Josh:  Recuerdo los prototipos, y que tan efectivos eran. Espero que sean mejor");
-                juego.ingresarVacuna(20, 2, "Vacuna", "Esta vacuna ingrementa el daño del jugador");
+                juego.ingresarVacuna(20, 1, "Vacuna", "Esta vacuna ingrementa el daño del jugador");
                 system("pause");
                 break;
               case 'c':
@@ -435,7 +444,6 @@ void menuPrincipal()
                 Sleep(1000);
                 cout << "*Guardas la llave negra" << endl;
                 juego.ingresarLlave("negro", 1, "Llave negra", "Una llave de color negro, abre el cuarto time machien.");
-                system("pause");
               case 'd':
                 juego.salaPrincipal();
                 system("pause");
@@ -445,17 +453,19 @@ void menuPrincipal()
                 break;
               }
             } while (enf != 'd');
+          } else {
+            system("pause");
           }
-          system("pause");
           break;
         case 'e':
+          //Maquina del tiempo
           char mt;
           int atk;
           if(juego.getPuerta(4) == false){
             juego.revisarLlave("negro", 4);
           }
           if(juego.timeMachine() == true){
-            cargarArchivoDialogo("./txt/EtapaFinal.txt", 6);
+            cargarArchivoDialogo("./txt/EtapaFinal.txt", 31);
             do {
               revisaLuz(juego);
               system("cls");
@@ -478,15 +488,15 @@ void menuPrincipal()
               switch (mt){
               case 'a':
                 atk = rand() % 5 + 1;
-                juego.setVidaEne(juego.getVidaEne() - atk);
-                cout << "Haz hecho " << atk << " de daño." << endl;
+                juego.setVidaEne(juego.getVidaEne() - atk - vac);
+                cout << "Haz hecho " << atk + vac << " de daño." << endl;
                 system("pause");
                 break;
               case 'b':
                 if (juego.revisarArma() == true){
                   atk = rand() % 10 + 5;
                   juego.setVidaEne(juego.getVidaEne() - atk);
-                  cout << "Haz hecho " << atk << " de daño." << endl;
+                  cout << "Haz hecho " << atk + vac << " de daño." << endl;
                 } else {
                   cout << "No tienes ninguna arma en tu inventario." << endl;
                 }
@@ -494,16 +504,19 @@ void menuPrincipal()
                 break;
               case 'c':
                 if (juego.revisarMedkit() == true){
-                  
+                  juego.usarMedkit();
+                  cout << "Haz incrementado tu vida a: +10" << endl;
+                  cout << "                      Vida:   " << juego.getVidaPer() << "/100 HP" << endl;
+                  juego.ingresarObjVacio("Medkit");
                 }
                 system("pause");
                 break;
               case 'd':
-              /*
                 if (juego.revisarVacuna() == true){
-                  juego.usarVacuna();
+                  vac = juego.usarVacuna();
+                  cout << "Haz incrmentado tus ataques a: +" << vac << endl;
+                  juego.ingresarObjVacio("Vacuna");
                 }
-                */
                 system("pause");
                 break;
               case 'e':
@@ -517,7 +530,7 @@ void menuPrincipal()
               }
               if (mt != 'e'){
                 atk = rand() % 10 + 1;
-                juego.setVidaPer(juego.getVidaPer() - atk);
+                juego.setVidaPer(juego.getVidaPer() - atk - vac);
                 for (int i = 0; i < 3; i++) {
                   system("Color 40");
                   Sleep(350);
@@ -531,21 +544,23 @@ void menuPrincipal()
             } while (juego.getVidaPer() > 0 && juego.getVidaEne() > 0);
             system("cls");
             if (juego.getVidaPer() <= 0){
-              //Final malo
+              cargarArchivoDialogo("./txt/FinalMalo.txt", 15);
               system("pause");
             } else if (juego.getVidaEne() <= 0){
-              //Final bueno
+              cargarArchivoDialogo("./txt/FinalBueno.txt", 36);
               system("pause");
             }
+            exit = true;
+          } else {
+            system("pause");
           }
-          exit = true;
           break;
         default:
           cout << "Si fuera asi de facil, ya estarias durmiendo en tu casa ¿No crees?" << endl;
           system("pause");
           break;
         }
-      } while (opc != 'e' && exit != true);
+      } while (opc != 'e' || exit != true);
       break;
       system("pause");
     case 2:
@@ -575,11 +590,12 @@ void menuPrincipal()
 
 int main()
 {
+  setlocale(LC_CTYPE, "Spanish");
   system("cls");
   system("Title Time Paradox");
   system("Color 04");
-  ajustePantalla();
-  cargarPortada();
+  //ajustePantalla();
+  //cargarPortada();
   menuPrincipal();
   //system("cls");
   //system("pause");
