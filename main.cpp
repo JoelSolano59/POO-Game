@@ -579,10 +579,6 @@ void menuPrincipal()
       cout << "¡Gracias por jugar!" << endl;
       system("pause");
       break;
-    case 5:
-      juego.mostrarInventario();
-      system("pause");
-      break;
     default:
       // Opcion default
       cout << "Opcion no valida, vuelve a intentarlo." << endl;
