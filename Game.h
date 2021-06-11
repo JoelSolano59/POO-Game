@@ -39,12 +39,13 @@ public:
 
     // Métodos
     int posicionDesocupadoInv();
+    bool revisarObj(std::string);
     void revisarLlave(std::string, int);
     bool revisarArma();
     bool revisarMedkit();
     bool revisarVacuna();
     void mostrarInventario();
-    // Estos métodos ingresan un objeto hija de Item dentro del inventario
+    // Estos métodos ingresan un objeto Item dentro del inventario
     void ingresarObjVacio(std::string);
     void ingresarLlave(std::string, int, std::string, std::string);
     void ingresarArma(int, int, std::string, std::string);
@@ -99,6 +100,19 @@ void Game::setVidaPer(int vp){vidaPer = vp;}
 void Game::setVidaEne(int ve){vidaEne = ve;}
 
 // Métodos
+// Método que revisa si dentro del inventario ya cuenta
+// con un Item de dicho nombre. 
+bool Game :: revisarObj(std::string name){
+    std::string a;
+    for(int i=0; i<10; i++){
+        a = inventario[i] -> getNombre();
+        if(name == a){
+            return true;
+        }
+    }
+    return false;
+}
+
 int Game :: posicionDesocupadoInv(){
     std::string name;
     for(int i=0; i<10; i++){
@@ -170,38 +184,47 @@ void Game :: ingresarObjVacio(std::string name){
 
 void Game :: ingresarLlave(std::string color, int usos, std::string name, std::string desc){
     int pos;
-    pos = posicionDesocupadoInv();
-    if(pos != -1){
-        inventario[pos] = new Llave(color, usos, name, desc);
+    if(revisarObj(name) == false){ // Ingresa el Item dentro del inventario
+        pos = posicionDesocupadoInv();
+        if(pos != -1){
+            inventario[pos] = new Llave(color, usos, name, desc);
+        }
     }
-    // Else no pudo ingresar objeto.
+    // Else no ingresa objeto
 }
 
 void Game :: ingresarArma(int dano, int usos, std::string name, std::string desc){
     int pos;
-    pos = posicionDesocupadoInv();
-    if(pos != -1){
-        inventario[pos] = new Arma(dano, usos, name, desc);
+    if(revisarObj(name) == false){
+        pos = posicionDesocupadoInv();
+        if(pos != -1){
+            inventario[pos] = new Arma(dano, usos, name, desc);
+        }
     }
-    // Else no pudo ingresar objeto.
+    // Else no ingresa objeto.
 }
 
 void Game :: ingresarMedkit(int magnitud, int usos, std::string name, std::string desc){
     int pos;
-    pos = posicionDesocupadoInv();
-    if(pos != -1){
-        inventario[pos] = new Medkit(magnitud, usos, name, desc);
+    if(revisarObj(name) == false){
+        pos = posicionDesocupadoInv();
+        if(pos != -1){
+            inventario[pos] = new Medkit(magnitud, usos, name, desc);
+        }
     }
-    // Else no pudo ingresar objeto.
+    // Else no ingresa objeto.
 }
 
 
 void Game :: ingresarVacuna(int magnitud, int usos, std::string name, std::string desc){
     int pos;
-    pos = posicionDesocupadoInv();
-    if(pos != -1){
-        inventario[pos] = new Vacuna(magnitud, usos, name, desc);
+    if(revisarObj(name) == false){
+        pos = posicionDesocupadoInv();
+        if(pos != -1){
+            inventario[pos] = new Vacuna(magnitud, usos, name, desc);
+        }
     }
+    // Else no ingresa objeto.
 }
 
 // Habitaciomes
